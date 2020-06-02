@@ -1,0 +1,18 @@
+
+Unable to find the file with the accounts.
+java.nio.file.NoSuchFileException: resources\accounts.txt
+
+
+Unable to find the file with the accounts.
+java.nio.file.NoSuchFileException: resources\groups.txt
+
+
+Problem with connecting to the client.
+java.net.SocketException: Connection reset
+key: channel=java.nio.channels.SocketChannel[connected local=/127.0.0.1:3120 remote=/127.0.0.1:61570], selector=sun.nio.ch.WindowsSelectorImpl@5474c6c, interestOps=1, readyOps=1
+[java.base/sun.nio.ch.SocketChannelImpl.throwConnectionReset(SocketChannelImpl.java:345), java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:376), bg.sofia.uni.fmi.mjt.splitwise.server.Server.readFromChannel(Server.java:83), bg.sofia.uni.fmi.mjt.splitwise.server.Server.start(Server.java:61), bg.sofia.uni.fmi.mjt.splitwise.server.Server.main(Server.java:37)]
+
+Problem with executing a command.
+java.nio.channels.ClosedChannelException
+key: channel=java.nio.channels.SocketChannel[closed], selector=sun.nio.ch.WindowsSelectorImpl@5474c6c, invalid command: null
+[java.base/sun.nio.ch.SocketChannelImpl.ensureOpenAndConnected(SocketChannelImpl.java:185), java.base/sun.nio.ch.SocketChannelImpl.beginWrite(SocketChannelImpl.java:449), java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:483), bg.sofia.uni.fmi.mjt.splitwise.server.Server.writeToChannel(Server.java:102), bg.sofia.uni.fmi.mjt.splitwise.server.Server.executeCommand(Server.java:118), bg.sofia.uni.fmi.mjt.splitwise.server.Server.start(Server.java:61), bg.sofia.uni.fmi.mjt.splitwise.server.Server.main(Server.java:37)]
