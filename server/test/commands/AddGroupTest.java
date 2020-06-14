@@ -59,7 +59,6 @@ public class AddGroupTest {
         Command addGroupCommand = new AddGroup(repositoryMock, profile, "group", members);
         when(repositoryMock.getProfileByUsername("username1")).thenReturn(profile1);
         when(repositoryMock.getProfileByUsername("username2")).thenReturn(profile2);
-
         when(repositoryMock.existsGroup("group")).thenReturn(true);
         assertEquals("add group with existing name", "This group name already exists.", addGroupCommand.execute());
     }
