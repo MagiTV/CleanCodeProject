@@ -3,6 +3,7 @@ package bg.sofia.uni.fmi.mjt.splitwise.server;
 import bg.sofia.uni.fmi.mjt.splitwise.server.commands.Command;
 import bg.sofia.uni.fmi.mjt.splitwise.server.commands.CommandFactory;
 import bg.sofia.uni.fmi.mjt.splitwise.server.commands.Commands;
+import exceptions.InvalidCommandException;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -107,19 +108,26 @@ public class Server {
     }
 
     public void executeCommand(SelectionKey key, String command) {
-        Command currentCommand = CommandFactory.getCommand(repository, key, command);
         try {
-            if (currentCommand == null) {
-                if (repository.checkIfDisconnect(command)) {
-                    writeToChannel(key, "You are disconnected.");
-                    repository.disconnect(key);
-                    return;
-                }
-                writeToChannel(key, "Wrong command. You can use \"" + Commands.HELP.getName() +
-                        "\" to see all commands.");
+            Command currentCommand = CommandFactory.getCommand(repository, key, command);
+            writeToChannel(key, currentCommand.execute());
+        } catch (InvalidCommandException ex) {
+            catchInvalidCommandException(key, command);
+        } catch (IOException ex) {
+            repository.reportLog(ex, "Problem with executing a command.\n",
+                    "key: " + key + " command: " + command + "\n" + Arrays.toString(ex.getStackTrace()));
+        }
+    }
+
+    private void catchInvalidCommandException(SelectionKey key, String command) {
+        try {
+            if (repository.checkIfDisconnect(command)) {
+                writeToChannel(key, "You are disconnected.");
+                repository.disconnect(key);
                 return;
             }
-            writeToChannel(key, currentCommand.execute());
+            writeToChannel(key, "Wrong command. You can use \"" + Commands.HELP.getName() +
+                    "\" to see all commands.");
         } catch (IOException ex) {
             repository.reportLog(ex, "Problem with executing a command.\n",
                     "key: " + key + " command: " + command + "\n" + Arrays.toString(ex.getStackTrace()));
