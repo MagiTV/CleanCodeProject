@@ -28,15 +28,20 @@ public class Login implements Command {
             return "You have already logged in.";
         }
         repository.addActiveUser(username, key);
-        StringBuilder message = new StringBuilder("Successfully logged in.\n");
         Profile profile = repository.getProfileByUsername(username);
+        String message = makeMessage(profile);
+        repository.saveProfiles(profile);
+        return message;
+    }
+
+    private String makeMessage(Profile profile) {
+        StringBuilder message = new StringBuilder("Successfully logged in.\n");
         String messages = profile.getMessages();
         if (messages == null) {
             message.append("No notifications to show.");
         } else {
             message.append(messages);
         }
-        repository.saveProfiles(profile);
         return message.toString();
     }
 }
