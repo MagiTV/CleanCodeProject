@@ -26,8 +26,7 @@ public class History implements Command {
             return NO_LOG_IN;
         }
         Path path = repository.getHistoryPath(profile.getUsername());
-        try (BufferedReader reader =
-                     new BufferedReader(Files.newBufferedReader(path))) {
+        try (BufferedReader reader = new BufferedReader(Files.newBufferedReader(path))) {
             String currentLine;
             StringBuilder message = new StringBuilder();
             while ((currentLine = reader.readLine()) != null) {

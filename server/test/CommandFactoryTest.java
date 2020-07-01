@@ -6,7 +6,6 @@ import org.mockito.Mock;
 
 import java.nio.channels.SelectionKey;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
@@ -17,17 +16,17 @@ public class CommandFactoryTest {
     @Mock
     private SelectionKey selectionKeyMock = mock(SelectionKey.class);
 
-    @Test (expected = InvalidCommandException.class)
+    @Test(expected = InvalidCommandException.class)
     public void nullCommandTest() throws InvalidCommandException {
         CommandFactory.getCommand(repositoryMock, selectionKeyMock, null);
     }
 
-    @Test (expected = InvalidCommandException.class)
+    @Test(expected = InvalidCommandException.class)
     public void emptyCommandTest() throws InvalidCommandException {
         CommandFactory.getCommand(repositoryMock, selectionKeyMock, "");
     }
 
-    @Test (expected = InvalidCommandException.class)
+    @Test(expected = InvalidCommandException.class)
     public void invalidCommandTest() throws InvalidCommandException {
         CommandFactory.getCommand(repositoryMock, selectionKeyMock, "cmd");
     }
@@ -50,7 +49,7 @@ public class CommandFactoryTest {
                 "register name name username password") instanceof Register);
     }
 
-    @Test (expected = InvalidCommandException.class)
+    @Test(expected = InvalidCommandException.class)
     public void invalidRegisterTest() throws InvalidCommandException {
         CommandFactory.getCommand(repositoryMock, selectionKeyMock, "register name username password");
     }
@@ -61,7 +60,7 @@ public class CommandFactoryTest {
                 "login username password") instanceof Login);
     }
 
-    @Test (expected = InvalidCommandException.class)
+    @Test(expected = InvalidCommandException.class)
     public void invalidLoginTest() throws InvalidCommandException {
         CommandFactory.getCommand(repositoryMock, selectionKeyMock, "login username");
     }
@@ -78,7 +77,7 @@ public class CommandFactoryTest {
                 CommandFactory.getCommand(repositoryMock, selectionKeyMock, "logOUT username") instanceof Logout);
     }
 
-    @Test (expected = InvalidCommandException.class)
+    @Test(expected = InvalidCommandException.class)
     public void invalidLogoutTest() throws InvalidCommandException {
         CommandFactory.getCommand(repositoryMock, selectionKeyMock, "log out");
     }
@@ -89,7 +88,7 @@ public class CommandFactoryTest {
                 "get-status") instanceof GetStatus);
     }
 
-    @Test (expected = InvalidCommandException.class)
+    @Test(expected = InvalidCommandException.class)
     public void invalidStatusTest() throws InvalidCommandException {
         CommandFactory.getCommand(repositoryMock, selectionKeyMock, "get status");
     }
@@ -100,7 +99,7 @@ public class CommandFactoryTest {
                 "get-History") instanceof History);
     }
 
-    @Test (expected = InvalidCommandException.class)
+    @Test(expected = InvalidCommandException.class)
     public void invalidHistoryTest() throws InvalidCommandException {
         CommandFactory.getCommand(repositoryMock, selectionKeyMock, "get history");
     }
@@ -111,9 +110,9 @@ public class CommandFactoryTest {
                 "add-friend friend") instanceof AddFriend);
     }
 
-    @Test (expected = InvalidCommandException.class)
+    @Test(expected = InvalidCommandException.class)
     public void addFriendWithoutArgumentTest() throws InvalidCommandException {
-        CommandFactory.getCommand(repositoryMock, selectionKeyMock,"add-friend");
+        CommandFactory.getCommand(repositoryMock, selectionKeyMock, "add-friend");
     }
 
     @Test
@@ -122,9 +121,9 @@ public class CommandFactoryTest {
                 "add-group name member member member member") instanceof AddGroup);
     }
 
-    @Test (expected = InvalidCommandException.class)
+    @Test(expected = InvalidCommandException.class)
     public void addGroupOnlyOneMemberTest() throws InvalidCommandException {
-        CommandFactory.getCommand(repositoryMock, selectionKeyMock,"add-group member");
+        CommandFactory.getCommand(repositoryMock, selectionKeyMock, "add-group member");
     }
 
     @Test
@@ -133,7 +132,7 @@ public class CommandFactoryTest {
                 "split name amount reason reason") instanceof SplitFriend);
     }
 
-    @Test (expected = InvalidCommandException.class)
+    @Test(expected = InvalidCommandException.class)
     public void invalidSplitTest() throws InvalidCommandException {
         CommandFactory.getCommand(repositoryMock, selectionKeyMock, "split name");
     }
@@ -144,12 +143,12 @@ public class CommandFactoryTest {
                 "Split-Group name amount reason") instanceof SplitGroup);
     }
 
-    @Test (expected = InvalidCommandException.class)
+    @Test(expected = InvalidCommandException.class)
     public void splitGroupFewerArgumentsGroupTest() throws InvalidCommandException {
         CommandFactory.getCommand(repositoryMock, selectionKeyMock, "split-group name amount");
     }
 
-    @Test (expected = InvalidCommandException.class)
+    @Test(expected = InvalidCommandException.class)
     public void invalidSplitGroupTest() throws InvalidCommandException {
         CommandFactory.getCommand(repositoryMock, selectionKeyMock, "Split-Grp name amount reason");
     }
@@ -160,7 +159,7 @@ public class CommandFactoryTest {
                 "payed name amount") instanceof Payed);
     }
 
-    @Test (expected = InvalidCommandException.class)
+    @Test(expected = InvalidCommandException.class)
     public void payFewerArgumentsTest() throws InvalidCommandException {
         CommandFactory.getCommand(repositoryMock, selectionKeyMock, "payed");
     }
@@ -171,7 +170,7 @@ public class CommandFactoryTest {
                 "REMIND name amount reason") instanceof Remind);
     }
 
-    @Test (expected = InvalidCommandException.class)
+    @Test(expected = InvalidCommandException.class)
     public void invalidRemindTest() throws InvalidCommandException {
         CommandFactory.getCommand(repositoryMock, selectionKeyMock, "remind name");
     }
