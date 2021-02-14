@@ -1,2 +1,1 @@
-# CleanCodeProject
-Проект по КПК
+# Splitwise
